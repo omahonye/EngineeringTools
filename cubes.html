@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Concrete Cube Strength Converters</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      color: #333;
+    }
+    .converter {
+      background: #fff;
+      padding: 50px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+    label, input, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+    }
+    .result {
+      font-weight: bold;
+      color: #006400;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Concrete Cube Strength Converters</h1>
+
+  <div class="converter">
+    <h2>7-Day → 28-Day</h2>
+    <label for="sevenDay">Enter 7-Day Strength (N/mm2):</label>
+    <input type="number" id="sevenDay" placeholder="e.g. 25">
+    <button onclick="convert7Day()">Convert</button>
+    <p class="result" id="result7Day"></p>
+  </div>
+
+  <div class="converter">
+    <h2>14-Day → 28-Day</h2>
+    <label for="fourteenDay">Enter 14-Day Strength (N/mm2):</label>
+    <input type="number" id="fourteenDay" placeholder="e.g. 30">
+    <button onclick="convert14Day()">Convert</button>
+    <p class="result" id="result14Day"></p>
+  </div>
+
+  <script>
+    function convert7Day() {
+      const input = parseFloat(document.getElementById('sevenDay').value);
+      if (!isNaN(input)) {
+        const result = input * 1.5384;
+        document.getElementById('result7Day').textContent = `Estimated Full Strength: ${result.toFixed(2)} N/mm2`;
+      } else {
+        document.getElementById('result7Day').textContent = "Please enter a valid number.";
+      }
+    }
+
+    function convert14Day() {
+      const input = parseFloat(document.getElementById('fourteenDay').value);
+      if (!isNaN(input)) {
+        const result = input * 1.111;
+        document.getElementById('result14Day').textContent = `Estimated Full Strength: ${result.toFixed(2)} N/mm2`;
+      } else {
+        document.getElementById('result14Day').textContent = "Please enter a valid number.";
+      }
+    }
+  </script>
+
+</body>
+</html>
