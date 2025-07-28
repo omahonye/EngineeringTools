@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cube to Cylinder Strength Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+    }
+    input, button {
+      padding: 10px;
+      margin-top: 10px;
+      width: 100%;
+      font-size: 1em;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>Cube to Cylinder Strength Converter</h2>
+  <label for="cubeStrength">Enter Cube Strength (N/mm2):</label>
+  <input type="number" id="cubeStrength" placeholder="e.g. 30" step="any">
+  <button onclick="convertStrength()">Convert</button>
+  <div id="result"></div>
+
+  <script>
+    function convertStrength() {
+      const x = parseFloat(document.getElementById('cubeStrength').value);
+      if (isNaN(x)) {
+        document.getElementById('result').innerText = "Please enter a valid cube strength.";
+        return;
+      }
+
+      const y = 3e-8 * Math.pow(x, 4) +
+                8e-6 * Math.pow(x, 3) -
+                0.0009 * Math.pow(x, 2) +
+                0.835 * x -
+                0.3052;
+
+      document.getElementById('result').innerText =
+        `Cylinder Strength: ~${y.toFixed(2)} N/mm2`;
+    }
+  </script>
+</body>
+</html>
