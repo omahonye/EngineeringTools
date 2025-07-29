@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flow Rate Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 40px 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    .converter {
+      background: #fff;
+      padding: 30px 20px;
+      margin: 20px auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+    label, input, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #006400;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #004d00;
+    }
+    .result {
+      font-weight: bold;
+      color: #006400;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Flow Rate Calculator</h2>
+
+  <div class="converter">
+    <label for="head">Enter Head (h) in metres:</label>
+    <input type="number" id="head" placeholder="e.g. 2" step="any">
+
+    <label for="diameter">Enter Diameter (mm):</label>
+    <input type="number" id="diameter" placeholder="e.g. 150" step="any">
+
+    <button onclick="calculateFlow()">Calculate Flow (m³/s)</button>
+    <p class="result" id="flowResult"></p>
+  </div>
+
+  <script>
+    function calculateFlow() {
+      const h = parseFloat(document.getElementById('head').value);
+      const dia = parseFloat(document.getElementById('diameter').value);
+      const g = 9.81;
+
+      if (isNaN(h) || isNaN(dia)) {
+        document.getElementById('flowResult').textContent = "Please enter valid values for both h and diameter.";
+        return;
+      }
+
+      const result = Math.sqrt(2 * g * h) * (dia / 1000);
+      document.getElementById('flowResult').textContent = `Estimated Flow Rate: ${result.toFixed(4)} m³/s`;
+    }
+  </script>
+
+</body>
+</html>
