@@ -3,19 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <title>Concrete Cube Strength Converters</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 40px;
+      margin: 0;
+      padding: 40px 20px;
       background-color: #f4f4f4;
     }
     h1 {
       color: #333;
+      text-align: center;
     }
     .converter {
       background: #fff;
-      padding: 50px;
-      margin-bottom: 30px;
+      padding: 30px 20px;
+      margin: 20px auto;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       max-width: 400px;
@@ -29,9 +32,20 @@
       padding: 10px;
       font-size: 16px;
     }
+    button {
+      background-color: #006400;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #004d00;
+    }
     .result {
       font-weight: bold;
       color: #006400;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -41,7 +55,7 @@
 
   <div class="converter">
     <h2>7-Day → 28-Day</h2>
-    <label for="sevenDay">Enter 7-Day Strength (N/mm2):</label>
+    <label for="sevenDay">Enter 7-Day Strength (N/mm²):</label>
     <input type="number" id="sevenDay" placeholder="e.g. 25">
     <button onclick="convert7Day()">Convert</button>
     <p class="result" id="result7Day"></p>
@@ -49,7 +63,7 @@
 
   <div class="converter">
     <h2>14-Day → 28-Day</h2>
-    <label for="fourteenDay">Enter 14-Day Strength (N/mm2):</label>
+    <label for="fourteenDay">Enter 14-Day Strength (N/mm²):</label>
     <input type="number" id="fourteenDay" placeholder="e.g. 30">
     <button onclick="convert14Day()">Convert</button>
     <p class="result" id="result14Day"></p>
@@ -58,22 +72,16 @@
   <script>
     function convert7Day() {
       const input = parseFloat(document.getElementById('sevenDay').value);
-      if (!isNaN(input)) {
-        const result = input * 1.5384;
-        document.getElementById('result7Day').textContent = `Estimated Full Strength: ${result.toFixed(2)} N/mm2`;
-      } else {
-        document.getElementById('result7Day').textContent = "Please enter a valid number.";
-      }
+      document.getElementById('result7Day').textContent = 
+        !isNaN(input) ? `Estimated Full Strength: ${(input * 1.5384).toFixed(2)} N/mm²` :
+        "Please enter a valid number.";
     }
 
     function convert14Day() {
       const input = parseFloat(document.getElementById('fourteenDay').value);
-      if (!isNaN(input)) {
-        const result = input * 1.111;
-        document.getElementById('result14Day').textContent = `Estimated Full Strength: ${result.toFixed(2)} N/mm2`;
-      } else {
-        document.getElementById('result14Day').textContent = "Please enter a valid number.";
-      }
+      document.getElementById('result14Day').textContent = 
+        !isNaN(input) ? `Estimated Full Strength: ${(input * 1.111).toFixed(2)} N/mm²` :
+        "Please enter a valid number.";
     }
   </script>
 
