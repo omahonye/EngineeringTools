@@ -2,50 +2,73 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Cube to Cylinder Strength Converter</title>
+  <title>Cube to Cylinder Converter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 20px;
-      max-width: 500px;
-      margin: auto;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 40px 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    .converter {
+      background: #fff;
+      padding: 30px 20px;
+      margin: 20px auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+    label, input, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
     }
     input, button {
       padding: 10px;
-      margin-top: 10px;
-      width: 100%;
-      font-size: 1em;
+      font-size: 16px;
     }
-    #result {
-      margin-top: 20px;
+    button {
+      background-color: #006400;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #004d00;
+    }
+    .result {
       font-weight: bold;
+      color: #006400;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <h2>Cube to Cylinder Strength Converter</h2>
-  <label for="cubeStrength">Enter Cube Strength (N/mm2):</label>
-  <input type="number" id="cubeStrength" placeholder="e.g. 30" step="any">
-  <button onclick="convertStrength()">Convert</button>
-  <div id="result"></div>
+
+  <h2>Cube → Cylinder Strength Converter</h2>
+
+  <div class="converter">
+    <label for="cubeStrength">Enter Cube Strength (N/mm²):</label>
+    <input type="number" id="cubeStrength" placeholder="e.g. 30" step="any">
+    <button onclick="convertStrength()">Convert</button>
+    <p class="result" id="result"></p>
+  </div>
 
   <script>
     function convertStrength() {
       const x = parseFloat(document.getElementById('cubeStrength').value);
-      if (isNaN(x)) {
-        document.getElementById('result').innerText = "Please enter a valid cube strength.";
-        return;
-      }
-
-      const y = 3e-8 * Math.pow(x, 4) +
-                8e-6 * Math.pow(x, 3) -
-                0.0009 * Math.pow(x, 2) +
-                0.835 * x -
-                0.3052;
-
-      document.getElementById('result').innerText =
-        `Cylinder Strength: ~${y.toFixed(2)} N/mm2`;
+      const y = 3e-8 * x**4 + 8e-6 * x**3 - 0.0009 * x**2 + 0.835 * x - 0.3052;
+      document.getElementById('result').textContent =
+        isNaN(x) ? "Please enter a valid cube strength." :
+        `Cylinder Strength: ~${y.toFixed(2)} N/mm²`;
     }
   </script>
+
 </body>
 </html>
