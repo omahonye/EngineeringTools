@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Slab Concrete Volume Estimator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 40px 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    .converter {
+      background: #fff;
+      padding: 30px 20px;
+      margin: 20px auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+    label, input, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #006400;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #004d00;
+    }
+    .result {
+      font-weight: bold;
+      color: #006400;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Slab Concrete Volume Estimator</h2>
+
+  <div class="converter">
+    <label for="length">Run (m):</label>
+    <input type="number" id="length" placeholder="e.g. 20" step="any">
+
+    <label for="width">Width (mm):</label>
+    <input type="number" id="width" placeholder="e.g. 1200" step="any">
+
+    <label for="depth">Depth (mm):</label>
+    <input type="number" id="depth" placeholder="e.g. 450" step="any">
+
+    <button onclick="calculateVolume()">Calculate Volume</button>
+    <p class="result" id="volumeResult"></p>
+  </div>
+
+  <script>
+    function calculateVolume() {
+      const L = parseFloat(document.getElementById('length').value);
+      const W = parseFloat(document.getElementById('width').value);
+      const D = parseFloat(document.getElementById('depth').value);
+
+      if (isNaN(L) || isNaN(W) || isNaN(D)) {
+        document.getElementById('volumeResult').textContent = "Please enter valid dimensions.";
+        return;
+      }
+
+      const volume = L * (W/1000) * (D/1000);
+      document.getElementById('volumeResult').textContent = `Estimated Volume: ${volume.toFixed(3)} m³`;
+    }
+  </script>
+
+</body>
+</html>
