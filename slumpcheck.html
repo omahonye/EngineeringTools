@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Slump Tolerance Checker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 40px 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    .converter {
+      background: #fff;
+      padding: 30px 20px;
+      margin: 20px auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+    label, input, select, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    input, select, button {
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #006400;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #004d00;
+    }
+    .result {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .pass {
+      color: green;
+    }
+    .fail {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Slump Tolerance Checker</h2>
+
+  <div class="converter">
+    <label for="slump">Measured Slump (mm):</label>
+    <input type="number" id="slump" placeholder="e.g. 75" step="any">
+
+    <label for="slumpClass">Specified Slump Class (IS-EN-206:2013):</label>
+    <select id="slumpClass">
+      <option value="">Select class</option>
+      <option value="S1">S1 (≤40 mm target)</option>
+      <option value="S2">S2 (50–90 mm target)</option>
+      <option value="S3">S3 (100–150 mm target)</option>
+      <option value="S4">S4 (160–210 mm target)</option>
+      <option value="S5">S5 (≥220 mm target)</option>
+    </select>
+
+    <button onclick="checkTolerance()">Check Tolerance</button>
+    <p class="result" id="toleranceOutput"></p>
+  </div>
+
+  <script>
+    function checkTolerance() {
+      const slump = parseFloat(document.getElementById('slump').value);
+      const cls = document.getElementById('slumpClass').value;
+      const result = document.getElementById('toleranceOutput');
+      
+      if (isNaN(slump) || slump < 0 || cls === "") {
+        result.textContent = "Please enter a valid slump and select a class.";
+        result.className = "result fail";
+        return;
+      }
+
+      let lower = 0, upper = 0, target = 0;
+
+      switch (cls) {
+        case "S1":
+          target = 40;
+          lower = target - 30;
+          upper = target + 30;
+          break;
+        case "S2":
+          target = 70; // mid of 50–90
+          lower = target - 40;
+          upper = target + 40;
+          break;
+        case "S3":
+        case "S4":
+        case "S5":
+          target = 100; // lowest valid value for S3/S4/S5
+          lower = target - 50;
+          upper = target + 50;
+          break;
+        default:
+          result.textContent = "Invalid class.";
+          result.className = "result fail";
+          return;
+      }
+
+      if (slump >= lower && slump <= upper) {
+        result.textContent = `✓ Within tolerance range (${lower}–${upper} mm)`;
+        result.className = "result pass";
+      } else {
+        result.textContent = `✗ Outside tolerance range (${lower}–${upper} mm)`;
+        result.className = "result fail";
+      }
+    }
+  </script>
+
+</body>
+</html>
