@@ -10,39 +10,75 @@
       background-color: #eef2f3;
       margin: 0;
       padding: 40px 20px;
-      text-align: center;
     }
     h1 {
+      text-align: center;
       color: #333;
+      margin-bottom: 10px;
     }
     p {
-      font-size: 18px;
+      text-align: center;
+      font-size: 16px;
       color: #555;
+      margin-bottom: 30px;
     }
-    a {
-      display: block;
-      margin: 20px auto;
-      padding: 12px 24px;
+    .grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      max-width: 800px;
+      margin: auto;
+    }
+    .tool {
       background-color: #006400;
       color: white;
       text-decoration: none;
-      border-radius: 6px;
+      padding: 16px;
+      border-radius: 8px;
       font-size: 16px;
-      max-width: 300px;
+      text-align: center;
+      transition: background-color 0.2s ease;
     }
-    a:hover {
+    .tool:hover {
       background-color: #004d00;
+    }
+    .section-title {
+      margin-top: 40px;
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #333;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <h1>Engineering Calculators</h1>
-  <p>Use below at your own risk.</p>
-  <a href="cubes.html">Cube Strength Converters</a>
-  <a href="cube2cyl.html">Cube → Cylinder Strength</a>
-  <a href="flowcalc.html">Head → Flow Rate</a>
-  <a href="slabvolume.html">Slab Concrete Estimator</a>
-  <a href="slumpcheck.html">Slump Checker</a>
-  <a href="blocks.html">Block Volume Estimator</a>
+
+  <h1>Engineering Calculation Tools</h1>
+  <p>Quick reference tools for on-site and design-stage estimates. Always verify with appropriate standards and professional judgement.</p>
+
+  <div class="section-title">Concrete Tools</div>
+  <div class="grid">
+    <a class="tool" href="cubes.html">Cube Strength Converters</a>
+    <a class="tool" href="cube2cyl.html">Cube → Cylinder Strength</a>
+    <a class="tool" href="slumpcheck.html">Slump Class Checker</a>
+  </div>
+
+  <div class="section-title"> Site Tools</div>
+  <div class="grid">
+    <a class="tool" href="slabvolume.html">Slab Volume Estimator</a>
+    <a class="tool" href="blocks.html">Blockwork Estimator</a>
+  </div>
+
+  <div class="section-title">General Tools</div>
+  <div class="grid">
+    <a class="tool" href="flowcalc.html">Head → Flow Rate</a>
+  </div>
+
+  <div class="section-title">Misc</div>
+  <div class="grid">
+    <a class="tool" href="about.html">About</a>
+  </div>
+
+  
 </body>
 </html>
