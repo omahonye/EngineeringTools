@@ -92,21 +92,24 @@
 
       switch (cls) {
         case "S1":
-          target = 40;
-          lower = target - 30;
-          upper = target + 30;
+          lower = 10;
+          upper = 70;
           break;
         case "S2":
-          target = 70; // mid of 50–90
-          lower = target - 40;
-          upper = target + 40;
+          lower = 10;
+          upper = 130;
           break;
-        case "S3":
+          case "S3":
+          lower = 50;
+          upper = 200;
+          break;
         case "S4":
+          lower = 110;
+          upper = 260;
+          break;
         case "S5":
-          target = 100; // lowest valid value for S3/S4/S5
-          lower = target - 50;
-          upper = target + 50;
+          lower = 170;
+          upper = 270;
           break;
         default:
           result.textContent = "Invalid class.";
